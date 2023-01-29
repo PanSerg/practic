@@ -1,5 +1,4 @@
-
-const items = localStorage.getItem('saved-watched');
+const form = localStorage.getItem('saved-watched');
 const parsedObject = JSON.parse(items);
 
 // let pageNumber = 0;
@@ -40,45 +39,59 @@ let films = [
   { name: 'name24', genre: 'fantasy' },
 ];
 
+const table = document.querySelector('.table')
+const pagination = document.querySelector('.pagination');
+
 let notesOnPage = 20;
+let countOfItems = Math.ceil(films.length / notesOnPage);
 
-for (let item of items) {
-    item.addEventListener('click', function () {
-    let pageNumber = +this.innerHTML;
-
-        /*
-            1 - 0 - 20
-            2 - 20 - 40
-            3 - 40 - 60
-        */
-        let start = (pageNumber - 1) * notesOnPage;
-        let end = start + notesOnPage;
-        
-        let notes = films.slice(start, end);
-       
-        table.innerHTML = '';
-
-        for (let note of notes) {
-            let object = document.createElement('object');
-            object.appendChild(object);
-
-            let film;
-
-            film = document.createElement('film');
-            film.innerHTML = note.name;
-            object.appendChild(film);
-
-            film = document.createElement('film');
-            film.innerHTML = note.name;
-            object.appendChild(film);
-        }
-    });
+let items = [];
+for (let i = 1; i <= countOfItems; i++) {
+  let li = document.createElement('li');
+  li.innerHTML = i;
+  pagination.appendChild(li);
+  items.push(li);
 }
 
+
+
+for (let item of items) {
+  item.addEventListener('click', function() {
+    let active = document.querySelector('.pagination li.active');
+    active.classList.remove('active');
+    if (active) {
+       active.classList.remove('active'); 
+     
+    }
+    this.classList.add('active');
+  });
+  
+    let pageNumber = +item.innerHTML;
+    /*
+      1 стр - 0 - 20
+      2 стр - 20 - 40
+      3 стр - 40 - 60
+      4 стр - 60 - 80
+    */
+    let start = (pageNumber - 1) * notesOnPage;
+    let end = start + notesOnPage;
+
+    let notes = films.slice(start, end);
+
+    table.innerHTML = '';
+    /*Массив из фильмов*/
+    for (let note of notes) {
+      let object = document.createElement('object');
+      table.appendChild(object);
+
+      createPage(note.name, object);
+    }
+  };
+
 function createPage(text, object) {
-  let film = document.createElement('film');
-  film.innerHTML = text;
-  object.appendChild(film);
+  let filmCard = document.createElement('film');
+  filmCard.innerHTML = text;
+  object.appendChild(filmCard);
 }
 
 
