@@ -37,7 +37,7 @@
 }
 @keyframes animate2 {
   0% {
-    box-shadow: inset #800080 0 0 0 17px;
+    box-shadow: inset #0000FF 0 0 0 17px;
     transform: rotate(-140deg);
   }
   50% {
