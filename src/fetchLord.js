@@ -3,7 +3,7 @@ export const obj = {
     user: "name"
 }
 function searchVCharacters(pageNumber = 1) {
-    const URL = `https://the-one-api.dev/v2/character?limit=200page=${pageNumber}`;
+    const URL = `https://the-one-api.dev/v2/character?limit=20$page=${pageNumber}`;
     const options = {
       headers: {
         Authorization: 'Bearer IeQdLNfvxZBIIF39AuZd',
